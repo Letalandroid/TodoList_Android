@@ -1,12 +1,14 @@
 package com.example.todolist;
 
+import android.net.Uri;
+
 public class ListItem {
 
     private int id;
     private String title;
-    private String image;
+    private Uri image;
 
-    public ListItem(int id, String title, String image) {
+    public ListItem(int id, String title, Uri image) {
         this.id = id;
         this.title = title;
         this.image = image;
@@ -28,11 +30,11 @@ public class ListItem {
         this.title = title;
     }
 
-    public String getImage() {
+    public Uri getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(Uri image) {
         this.image = image;
     }
 }
