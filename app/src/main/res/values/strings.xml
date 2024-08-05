@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TodoList</string>
+    <string name="txt_title_label">TodoList App</string>
+    <string name="txt_add_label">Añadir</string>
+    <string name="txt_select_img_label">Seleccionar imagen</string>
+    <string name="txt_previous_label">Previous Tasks</string>
+    <string name="txt_desc_img_label">Button add element and update the table on database</string>
+    <string name="txt_test_label">Una nube cuelga sobre mi</string>
+    <string name="oshi_no_ko_image">Oshi No Ko image</string>
+</resources>
