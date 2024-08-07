@@ -10,23 +10,20 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.todolist.Edit;
+import com.example.todolist.Share;
 import com.example.todolist.ListItem;
-import com.example.todolist.MainActivity;
 import com.example.todolist.R;
 
 public class ItemViewHolder extends RecyclerView.ViewHolder {
 
     private TextView txtTitle;
     private ImageView ivImage;
-    private ImageButton btnRemove;
     private FrameLayout flTask;
 
     public ItemViewHolder(View view) {
         super(view);
         this.txtTitle = view.findViewById(R.id.txtTitle);
         this.ivImage = view.findViewById(R.id.ivImage);
-        this.btnRemove = view.findViewById(R.id.btnRemove);
         this.flTask = view.findViewById(R.id.frl_1);
     }
 
@@ -34,11 +31,14 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
         txtTitle.setText(itemsListModel.getTitle());
         ivImage.setImageURI(itemsListModel.getImage());
         flTask.setOnClickListener(view -> {
-            Intent intent = new Intent(view.getContext(), Edit.class);
-            view.getContext().startActivity(intent);
-        });
-        btnRemove.setOnClickListener(view -> {
-            Toast.makeText(view.getContext(), String.valueOf(itemsListModel.getId()), Toast.LENGTH_SHORT).show();
+            if (!itemsListModel.getTitle().isEmpty() && itemsListModel.getImage() != null) {
+                Intent intent = new Intent(view.getContext(), Share.class);
+                intent.putExtra("title", itemsListModel.getTitle());
+                intent.putExtra("image", itemsListModel.getImage());
+                view.getContext().startActivity(intent);
+            } else {
+                Toast.makeText(view.getContext(), "Volver a intentar", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }

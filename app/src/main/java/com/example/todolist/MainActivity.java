@@ -45,8 +45,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setDataInit () {
-        tasks_list.add(new ListItem(1, "Comprar", null));
-        tasks_list.add(new ListItem(2, "Limpiar", null));
+        tasks_list.add(new ListItem(1, "Listar", null));
     }
 
     @Override
