@@ -1,6 +1,8 @@
 package com.example.todolist;
 
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton btnAdd;
     Button btnLoadPicture;
     List<ListItem> tasks_list = new ArrayList<>();
+    String MY_CHANNEL_ID = "TodoListApp";
 
     private void init() {
         EdgeToEdge.enable(this);
@@ -66,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             if (!txtTitle.isEmpty() && uriImage != null) {
                 tasks_list.add(new ListItem((!tasks_list.isEmpty()) ? tasks_list.size() + 1 : 1, txtTitle, uriImage));
                 title.setText("");
+                sendNotify();
                 loadRecyclerView();
             } else {
                 Toast.makeText(getApplicationContext(),
@@ -96,6 +101,18 @@ public class MainActivity extends AppCompatActivity {
                             "No se seleccionó la imagen",
                             Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void sendNotify() {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, MY_CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle("TodoList")
+                .setContentText("Una nota fue agregada a la lista!")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        notificationManager.notify(1, builder.build());
+
     }
 
     private void loadRecyclerView() {
